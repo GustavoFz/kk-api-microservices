@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+  api:
+    build: ./api
+    restart: always
+    hostname: api
+    volumes:
+      - .:/api
+      - /api/node_modules
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+
+  product:
+    build: ./product
+    restart: always
+    hostname: product
+    volumes:
+      - .:/product
+      - /product/node_modules
+    command: npm run start:dev
+    ports:
+      - 3001:3001
+    depends_on:
+      - mongodb
+
+  cart:
+    build: ./cart
+    restart: always
+    hostname: cart
+    volumes:
+      - .:/cart
+      - /cart/node_modules
+    command: npm run start:dev
+    ports:
+      - 3002:3002
+    depends_on:
+      - postgres
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+
+  mongo-seed:
+    build: ./db/mongo-seed
+    depends_on:
+      - mongodb
