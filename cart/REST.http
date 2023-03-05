@@ -1,0 +1,27 @@
+POST http://localhost:3002/api/v1/shopping-cart HTTP/1.1
+content-type: application/json
+
+{
+    "userId": "12",
+    "productId": "640129062a7618f0b8af525d"
+}
+
+###
+PATCH  http://localhost:3000/api/v1/product/63ffe0390c6712aeb25a301c HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Casaco"
+}
+
+###
+GET http://localhost:3002/api/v1/shopping-cart  HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3002/api/v1/shopping-cart/11 HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:3002/api/v1/shopping-cart/63ffe0390c6712aeb15a302c HTTP/1.1
+content-type: application/json

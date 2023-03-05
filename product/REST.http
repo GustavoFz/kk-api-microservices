@@ -1,0 +1,27 @@
+POST http://localhost:3001/api/v1/product HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Bota",
+    "price": 50.50
+}
+
+###
+PATCH  http://localhost:3001/api/v1/product/63ffe0390c6712aeb25a301c HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Casaco"
+}
+
+###
+GET http://localhost:3001/api/v1/product HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3001/api/v1/product/640129062a7618f0b8af525d HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:3000/api/v1/product/63ffe5517509257526231e3f HTTP/1.1
+content-type: application/json

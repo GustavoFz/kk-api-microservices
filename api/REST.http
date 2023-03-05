@@ -1,0 +1,40 @@
+POST http://localhost:3000/api/cart HTTP/1.1
+content-type: application/json
+
+{
+    "userId": "11",
+    "productId":"640417518f6cd86cf70cd407"
+}
+
+###
+POST http://localhost:3000/api/product HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Tenis",
+    "price": 77.25
+}
+
+###
+PATCH  http://localhost:3000/api/cart/63ffe0390c6712aeb25a301c HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Casaco"
+}
+
+###
+GET http://localhost:3000/api/product HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3000/api/cart HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:3000/api/cart/11 HTTP/1.1
+content-type: application/json
+
+###
+DELETE http://localhost:3000/api/cart/6403fb1c86f3c709c8fdcf8a HTTP/1.1
+content-type: application/json
