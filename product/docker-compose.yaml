@@ -9,13 +9,13 @@ services:
     volumes:
       - mongodb_data_container:/data/db
 
-  api:
+  product:
     build: .
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - ${APP_PORT}:${APP_PORT}
+      - ${PORT_PRODUCT}:${PORT_PRODUCT}
     command: npm run start:dev
     env_file:
       - .env

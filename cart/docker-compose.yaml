@@ -10,13 +10,13 @@ services:
       - postgres_data_container:/data/db
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  api:
+  cart:
     build: .
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - ${APP_PORT}:${APP_PORT}
+      - ${PORT_CART}:${PORT_CART}
     command: npm run start:dev
     env_file:
       - .env
