@@ -2,7 +2,7 @@
 
 ## Running the example with docker-compose
 
-Execute `cp .env.example .env && docker-compose up -d` from the root of the repository
+Execute `cp .env-example .env && docker-compose up -d` from the root of the repository
 
 - When run in docker, a container called mongo_seed will seed the product bank with seed items
 
