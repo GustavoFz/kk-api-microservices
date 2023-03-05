@@ -8,10 +8,12 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateShoppingCartDto } from './dto/create-shopping-cart.dto';
 import { ShoppingCartService } from './shopping-cart.service';
 
-@Controller('api/v1/shopping-cart')
+@ApiTags('Shopping Cart')
+@Controller('api/shopping-cart')
 export class ShoppingCartController {
   constructor(private readonly shoppingCartService: ShoppingCartService) {}
 
