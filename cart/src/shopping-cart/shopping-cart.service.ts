@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductService } from '../product/product.service';
@@ -25,7 +25,7 @@ export class ShoppingCartService {
     });
 
     if (!cart) {
-      throw new Error('Cart not found');
+      throw new NotFoundException('Cart not found');
     }
     return cart;
   }
@@ -37,13 +37,13 @@ export class ShoppingCartService {
     });
 
     if (!cart) {
-      throw new Error('Cart not found');
+      throw new NotFoundException('Cart not found');
     }
 
     const product = cart.products.filter((p) => p.productId === productId);
 
     if (product.length < 1) {
-      throw new Error('Product does not exist in the user is cart');
+      throw new NotFoundException('Product does not exist in the user is cart');
     }
 
     if (product[0].quantity == 1) {

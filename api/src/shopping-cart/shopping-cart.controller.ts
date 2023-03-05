@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Headers,
+  HttpException,
   Param,
   Post,
 } from '@nestjs/common';
@@ -32,9 +33,13 @@ export class ShoppingCartController {
     }
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<ShoppingCartEntity> {
-    return await this.shoppingService.findByUser(id);
+  @Get(':userId')
+  async findOne(@Param('userId') userId: string): Promise<ShoppingCartEntity> {
+    try {
+      return await this.shoppingService.findByUser(userId);
+    } catch (error) {
+      throw new HttpException(error.message, error.status);
+    }
   }
 
   @Delete(':productId')

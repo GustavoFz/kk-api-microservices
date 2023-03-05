@@ -33,16 +33,18 @@ export class ShoppingCartService {
 
   async findByUser(id): Promise<ShoppingCartEntity> {
     const url = `${this.URL_SHOPPING_CART}/${id}`;
+
     const response = await lastValueFrom(
       this.httpService.get<ShoppingCartEntity>(url),
     );
 
-    if (response.status === HttpStatus.OK) {
+    if (response.data && response.status === HttpStatus.OK) {
       const result = await this.getPriceNameAndQuantity(response.data);
 
       return result;
     }
-    throw new NotFoundException('Cart not found');
+
+    throw new Error('Cart not found');
   }
 
   async addToCart(data: AddToCartDto): Promise<void> {
@@ -96,20 +98,23 @@ export class ShoppingCartService {
   async getPriceNameAndQuantity(
     cart: ShoppingCartEntity,
   ): Promise<ShoppingCartEntity> {
-    cart.totalPrice = 0;
-    cart.totalQuantity = 0;
-    for (let i = 0; i < cart.products.length; i += 1) {
-      const product = await this.productService.findById(
-        cart.products[i].productId,
-      );
+    if (cart) {
+      cart.totalPrice = 0;
+      cart.totalQuantity = 0;
+      for (let i = 0; i < cart.products.length; i += 1) {
+        const product = await this.productService.findById(
+          cart.products[i].productId,
+        );
 
-      cart.products[i].price = +product.price.toFixed(2);
-      cart.totalPrice += +(product.price * cart.products[i].quantity).toFixed(
-        2,
-      );
-      cart.totalQuantity += cart.products[i].quantity;
-      cart.products[i].name = product.name;
+        cart.products[i].price = +product.price.toFixed(2);
+        cart.totalPrice += +(product.price * cart.products[i].quantity).toFixed(
+          2,
+        );
+        cart.totalQuantity += cart.products[i].quantity;
+        cart.products[i].name = product.name;
+        return cart;
+      }
     }
-    return cart;
+    throw new NotFoundException('Cart not found');
   }
 }

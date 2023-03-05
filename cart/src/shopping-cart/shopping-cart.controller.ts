@@ -36,10 +36,10 @@ export class ShoppingCartController {
     }
   }
 
-  @Get(':id')
-  async findOne(@Param('userId') id: string) {
+  @Get(':userId')
+  async findOne(@Param('userId') userId: string) {
     try {
-      return await this.shoppingCartService.findByUser(id);
+      return await this.shoppingCartService.findByUser(userId);
     } catch (error) {
       throw new HttpException(error.message, error.status);
     }

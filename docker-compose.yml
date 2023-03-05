@@ -3,6 +3,8 @@ services:
   api:
     build: ./api
     restart: always
+    env_file:
+      - .env
     hostname: api
     volumes:
       - .:/api
@@ -14,6 +16,8 @@ services:
   product:
     build: ./product
     restart: always
+    env_file:
+      - .env
     hostname: product
     volumes:
       - .:/product
@@ -27,6 +31,8 @@ services:
   cart:
     build: ./cart
     restart: always
+    env_file:
+      - .env
     hostname: cart
     volumes:
       - .:/cart
