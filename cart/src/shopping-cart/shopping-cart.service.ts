@@ -24,9 +24,6 @@ export class ShoppingCartService {
       relations: ['products'],
     });
 
-    if (!cart) {
-      throw new NotFoundException('Cart not found');
-    }
     return cart;
   }
 

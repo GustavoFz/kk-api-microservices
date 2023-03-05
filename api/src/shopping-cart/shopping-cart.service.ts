@@ -44,7 +44,7 @@ export class ShoppingCartService {
       return result;
     }
 
-    throw new Error('Cart not found');
+    throw new NotFoundException('Cart not found');
   }
 
   async addToCart(data: AddToCartDto): Promise<void> {
